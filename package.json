@@ -19,7 +19,7 @@
     "@tailwindcss/typography": "^0.5.19"
   },
   "optionalDependencies": {
-    "@tailwindcss/oxide-linux-x64-gnu": "4.1.13",
+    "@tailwindcss/oxide-linux-x64-gnu": "4.1.15",
     "lightningcss-linux-x64-gnu": "1.30.2"
   }
 }
