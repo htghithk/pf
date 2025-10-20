@@ -29,6 +29,10 @@ tags: ['kew', 'leipzig', '2025']
 |[^9]|"Niemand hat nichts zu verbergen" von Leena Simon auf [digitalcourage.de](https://digitalcourage.de/nichts-zu-verbergen) vom 24.12.2017 zuletzt besucht am 1.10.2025|
 |[^10]|"Fight Chat Control" Weseite auf [fightchatcontrol](https://fightchatcontrol.eu/) zuletzt besucht am 15.10.2025|
 |[^11]|"Stop Chat Control" auf [Mullvad VPN](https://mullvad.net/en/chatcontrol/stop-chatcontrol) zuletzt besucht am 17.10.2025|
+|[^12]|"The Data Big Tech Companies Have On You" von Aliza Vigderman und Gabe Turner auf [security.org](https://www.security.org/resources/data-tech-companies-have/) vom 10.10.2025 zuletzt besucht am 20.10.2025|
+|[^13]|"Edward Snowden Releases New Message: ‘You Have Been Warned’" von Mandy Taheri auf [newsweek.com](https://www.newsweek.com/edward-snowden-open-ai-nsa-warning-1913173) vom 14.01.2024 zuletzt besucht am 21.10.2025|
+|[^14]|"German police expands use of Palantir surveillance software" von Marcel Fürstenau auf [de.com](https://www.dw.com/en/german-police-expands-use-of-palantir-surveillance-software/a-73497117) vom 08.04.2025 zuletzt besucht am 21.10.2025|
+|[^15]|"State Mass surveillance" auf [Mullvad VPN](https://mullvad.net/en/why-privacy-matters/state-mass-surveillance) zuletzt besucht am 21.10.2025|
 
 [^1]: https://www.iso.org/obp/ui/en/#iso:std:iso-iec:2382:ed-1:v2:en
 [^2]: https://de.wikipedia.org/wiki/Liste_von_Datendiebst%C3%A4hlen
@@ -41,3 +45,7 @@ tags: ['kew', 'leipzig', '2025']
 [^9]: https://digitalcourage.de/nichts-zu-verbergen
 [^10]: https://fightchatcontrol.eu/
 [^11]: https://mullvad.net/en/chatcontrol/stop-chatcontrol
+[^12]: https://www.security.org/resources/data-tech-companies-have/
+[^13]: https://www.newsweek.com/edward-snowden-open-ai-nsa-warning-1913173
+[^14]: https://www.dw.com/en/german-police-expands-use-of-palantir-surveillance-software/a-73497117
+[^15]: https://mullvad.net/en/why-privacy-matters/state-mass-surveillance
