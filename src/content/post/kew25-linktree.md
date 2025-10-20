@@ -4,7 +4,7 @@ date: 2025-10-23
 tags: ['kew', 'leipzig', '2025']
 ---
 
-[Folien](../slides/kew-2025-dig-selfdef.pdf)
+- [Folien](https://git.ag-link.xyz/linus/kew25-selfdef/src/branch/main/slides.pdf)
 
 # Weitere Artikel
 
@@ -12,6 +12,7 @@ tags: ['kew', 'leipzig', '2025']
 - Mullvad VPN [total surveillance pdf](https://mullvad.net/pdfs/Total_surveillance.pdf)
 - [Events](https://ag-link.xyz/events/) der AG Link
 - Veranstaltungen der [KEW](https://kew-leipzig.de/programm/) 2025
+- [Checklist](https://activistchecklist.org/) für Aktivist:innen
 
 # Quellen
 
