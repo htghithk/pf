@@ -13,6 +13,7 @@ tags: ['kew', 'leipzig', '2025']
 - [Events](https://ag-link.xyz/events/) der AG Link
 - Veranstaltungen der [KEW](https://kew-leipzig.de/programm/) 2025
 - [Checklist](https://activistchecklist.org/) für Aktivist:innen
+- [Google Services I switched to](https://www.youtube.com/watch?v=u_Lxkt50xOg) von PewdiePie
 
 # Quellen
 
