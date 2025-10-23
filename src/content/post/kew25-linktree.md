@@ -14,6 +14,7 @@ tags: ['kew', 'leipzig', '2025']
 - Veranstaltungen der [KEW](https://kew-leipzig.de/programm/) 2025
 - [Checklist](https://activistchecklist.org/) für Aktivist:innen
 - [Google Services I switched to](https://www.youtube.com/watch?v=u_Lxkt50xOg) von PewdiePie
+- [Aktion gegen die Bezahlkarte für Asylsuchende](https://neinzubezahlkartenleipzig.noblogs.org/)
 
 # Quellen
 
