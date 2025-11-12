@@ -4,6 +4,7 @@ import Title from "../components/Title.astro";
 import Socials from "../components/Socials.astro";
 import List from "../components/List.astro";
 import { getCollection } from "astro:content";
+import { TITLE } from "../GLOBALS.astro";
 
 let socials = [
 	{ title: "Mail", link: "mailto:mail@linussilberstein.de" },
@@ -27,8 +28,8 @@ const sortedYears = Object.keys(allBlogEntriesGroupedByYear).sort(
 );
 ---
 
-<BasicLayout title="Linus Silberstein">
-	<Title title="Linus Silberstein" />
+<BasicLayout title={TITLE}>
+	<Title title={TITLE.toUpperCase()} />
 	{
 		sortedYears.map((year) => (
 			<List
