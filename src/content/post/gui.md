@@ -1,7 +1,7 @@
 ---
 title: Entstehung der Desktop Metapher
 date: 2025-08-17
-tags: ['gui', 'mensch computer interaktion', 'apple', 'xerox']
+tags: ['gui', 'mensch computer interaktion', 'apple', 'xerox', '2025']
 ---
 
 Vor kurzem habe ich "Liber Indigo: The Affordances of Magic"[^1] gelesen. Vor allem die Anfänge, in denen Kirkwood

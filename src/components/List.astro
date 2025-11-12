@@ -1,8 +1,9 @@
 ---
-const { items, type } = Astro.props;
+const { items, type, title } = Astro.props;
 ---
 
 <section class="items-start mt-8">
+    {title && <h2 class="font-mono">{title}</h2>}
     <ul class="list-disc list-inside">
         {
             items.map((item) => (

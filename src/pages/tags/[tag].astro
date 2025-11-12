@@ -27,6 +27,7 @@ const filteredPosts = posts
         type: post.file.split("/").reverse()[1],
         slug: post.file.split("/").reverse()[0].replace(".md", ""),
         title: post.frontmatter.title,
+        date: post.frontmatter.date
     }));
 ---
 
@@ -36,16 +37,17 @@ const filteredPosts = posts
     <section class="items-start mt-8">
         <ul class="list-disc list-inside">
             {
-                filteredPosts.map((post) => (
-                    <li>
-                        <a
-                            href={`/${post.type}s/${post.slug}`}
-                        >
-                            {post.title}
-                        </a>
-                    </li>
-                ))
-            }
+            filteredPosts.map((item) => (
+                <li>
+                    <a
+                        href={`/${item.type}/${item.slug}`}
+                        class="hover:underline text-accent vistited:text-secondary"
+                    >
+                        {item.title}
+                    </a>
+                </li>
+            ))
+        }
         </ul>
     </section>
 </BasicLayout>
