@@ -1,0 +1,321 @@
+---
+---
+<style>
+.asciiart-canvas {
+  --ascii-blur: 10px; /* adjust this value to change blur amount */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+  filter: blur(var(--ascii-blur));
+  -webkit-filter: blur(var(--ascii-blur));
+  transform: translateZ(0);
+  will-change: filter, transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .asciiart-canvas { display: none; }
+}
+</style>
+
+<canvas class="asciiart-canvas" id="asciiart-canvas" aria-hidden="true"></canvas>
+
+<script type="module">
+(() => {
+  const canvas = document.getElementById('asciiart-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d', { alpha: true });
+
+  let cols = 0, rows = 0, width = 0, height = 0, dpr = Math.max(1, window.devicePixelRatio || 1);
+  const fontSize = 7;                         // tune density
+  // leading space included (important) — light -> heavy
+  const glyphs = " .,:;iIl!+*%#@█";
+  let state = null;       // Uint8Array 0/1
+  let next = null;        // Uint8Array
+  let age = null;         // Float32Array brightness 0..1
+  let raf = null;
+  let lastTick = 0;
+  const tickInterval = 100; // ms per automaton step
+
+  // reset logic
+  let resetting = false;
+  const fadeStep = 0.02; // per frame age decay while fading
+  const fadeCompleteThreshold = 0.02; // when max age <= this we re-seed
+  const minAliveFraction = 0.03; // fraction of cells threshold to trigger reset
+  const minAliveAbsolute = 3; // minimum absolute threshold
+
+  // color scheme handling
+  const mqLight = (typeof window !== 'undefined' && window.matchMedia)
+    ? window.matchMedia('(prefers-color-scheme: light)')
+    : { matches: false, addEventListener: () => {} };
+  let isLight = mqLight.matches;
+  mqLight.addEventListener?.('change', (e) => {
+    isLight = e.matches;
+    // restart to ensure colors/background update immediately
+    const parent = canvas.parentElement;
+    if (parent) start(parent);
+  });
+
+  function setup(parent) {
+    if (!parent) return;
+    dpr = Math.max(1, window.devicePixelRatio || 1);
+    width = Math.max(0, parent.clientWidth);
+    height = Math.max(0, parent.clientHeight);
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    canvas.width = Math.max(1, Math.floor(width * dpr));
+    canvas.height = Math.max(1, Math.floor(height * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    cols = Math.max(2, Math.floor(width / fontSize));
+    rows = Math.max(2, Math.floor(height / fontSize));
+    const len = cols * rows;
+    state = new Uint8Array(len);
+    next = new Uint8Array(len);
+    age = new Float32Array(len);
+
+    randomizeInitial(len);
+
+    ctx.textBaseline = 'top';
+    ctx.font = `${fontSize}px monospace`;
+    ctx.globalCompositeOperation = 'source-over';
+
+    // ensure no canvas glow
+    ctx.shadowBlur = 0;
+    ctx.shadowColor = 'transparent';
+  }
+
+  function randomizeInitial(len) {
+    const p = 0.28; // initial alive probability
+    for (let i = 0; i < len; i++) {
+      state[i] = Math.random() < p ? 1 : 0;
+      next[i] = 0;
+      age[i] = state[i] ? 0.8 + Math.random() * 0.2 : Math.random() * 0.06;
+    }
+    resetting = false;
+  }
+
+  function idx(x, y) {
+    return y * cols + x;
+  }
+
+  function neighbors(x, y) {
+    let n = 0;
+    for (let yy = y - 1; yy <= y + 1; yy++) {
+      for (let xx = x - 1; xx <= x + 1; xx++) {
+        if (xx === x && yy === y) continue;
+        const sx = (xx + cols) % cols; // wrap horizontally
+        const sy = (yy + rows) % rows; // wrap vertically
+        n += state[idx(sx, sy)];
+      }
+    }
+    return n;
+  }
+
+  function stepAutomaton() {
+    // Conway-like rules with small randomness to keep things lively
+    const len = cols * rows;
+    let aliveCount = 0;
+
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const i = idx(x, y);
+        const n = neighbors(x, y);
+        const alive = state[i] === 1;
+        let newAlive = 0;
+        if (alive) {
+          newAlive = (n === 2 || n === 3) ? 1 : 0;
+        } else {
+          newAlive = (n === 3) ? 1 : 0;
+        }
+
+        // small spontaneous birth or death for variance
+        if (!alive && Math.random() < 0.002) newAlive = 1;
+        if (alive && Math.random() < 0.0015) newAlive = 0;
+
+        next[i] = newAlive;
+      }
+    }
+
+    // if next state has very few alive cells -> trigger reset sequence
+    for (let i = 0; i < len; i++) {
+      if (next[i]) aliveCount++;
+    }
+    const threshold = Math.max(minAliveAbsolute, Math.floor(len * minAliveFraction));
+    if (aliveCount <= threshold) {
+      initiateReset(len);
+      return;
+    }
+
+    // commit next -> state and give flashes for newly born cells
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const i = idx(x, y);
+        const wasAlive = state[i] === 1;
+        const isAlive = next[i] === 1;
+        state[i] = isAlive ? 1 : 0;
+
+        if (!wasAlive && isAlive) {
+          age[i] = 1.0; // bright
+          // infect neighbors slightly (boost their age so they flash)
+          for (let yy = y - 1; yy <= y + 1; yy++) {
+            for (let xx = x - 1; xx <= x + 1; xx++) {
+              const sx = (xx + cols) % cols;
+              const sy = (yy + rows) % rows;
+              const j = idx(sx, sy);
+              age[j] = Math.max(age[j], 0.6 + Math.random() * 0.4);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  function initiateReset(len) {
+    // mark resetting mode: immediately kill cells visually, then fade ages down
+    resetting = true;
+    for (let i = 0; i < len; i++) {
+      state[i] = 0;
+      next[i] = 0;
+      // optionally amplify age so fade is visible
+      age[i] = Math.max(age[i], 0.2 + Math.random() * 0.6);
+    }
+  }
+
+  function pickGlyph(alive, a) {
+    // When dead: bias strongly toward space to ensure spaces appear often.
+    if (!alive) {
+      if (Math.random() < 0.72) return ' ';
+      // otherwise pick a light glyph (avoid heavy ones)
+      const maxIdx = Math.max(1, Math.floor(glyphs.length / 3));
+      return glyphs[Math.floor(Math.random() * maxIdx)];
+    }
+
+    // Alive: bias toward heavier glyphs depending on age/energy
+    const energyIdx = Math.floor(a * (glyphs.length - 1));
+    // allow small jitter to avoid banding
+    const off = Math.floor(Math.random() * 2);
+    return glyphs[Math.min(glyphs.length - 1, energyIdx + off)];
+  }
+
+  function getBgFill() {
+    return isLight ? 'rgba(245,245,247,0.08)' : 'rgba(8,8,10,0.08)';
+  }
+
+  function computeGray(a) {
+    // darkMapping => gray = 100..255 (higher a -> lighter)
+    const darkGray = Math.floor(100 + (155 * a));
+    if (!isLight) return clamp(darkGray, 0, 255);
+    // light mode: invert the dark mapping (so high age -> darker)
+    return clamp(255 - darkGray, 0, 255);
+  }
+
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+  function render(now) {
+    // clear with slight translucent overlay for subtle trails (inverted for light mode)
+    ctx.fillStyle = getBgFill();
+    ctx.fillRect(0, 0, width, height);
+
+    // If in resetting mode: decay ages across board until fade complete, then reseed
+    if (resetting) {
+      const len = cols * rows;
+      let maxAge = 0;
+      for (let i = 0; i < len; i++) {
+        age[i] = Math.max(0, age[i] - fadeStep);
+        if (age[i] > maxAge) maxAge = age[i];
+      }
+
+      // Render grid while fading (states are all 0 because we set them in initiateReset)
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const i = idx(x, y);
+          const a = age[i];
+          const glyph = pickGlyph(false, a); // dead-style glyphs
+          const gray = computeGray(a);
+          const alpha = 0.2 + 0.7 * a;
+          ctx.fillStyle = `rgba(${gray},${gray},${gray},${alpha})`;
+          const px = x * fontSize;
+          const py = y * fontSize;
+          ctx.fillText(glyph, px, py);
+        }
+      }
+
+      // when faded enough, re-seed a fresh random formation
+      if (maxAge <= fadeCompleteThreshold) {
+        randomizeInitial(cols * rows);
+      }
+
+      raf = requestAnimationFrame(render);
+      return;
+    }
+
+    // step automaton on interval
+    if (!lastTick) lastTick = now;
+    if (now - lastTick >= tickInterval) {
+      stepAutomaton();
+      lastTick = now;
+    }
+
+    // render grid and age decay
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const i = idx(x, y);
+        // decay age slowly
+        age[i] = Math.max(0, age[i] - 0.01);
+
+        const a = age[i]; // 0..1
+        const alive = state[i] === 1;
+
+        // pick glyph (ensures space is used frequently for dead cells)
+        const glyph = pickGlyph(alive, a);
+
+        // color computed and inverted for light mode
+        const gray = computeGray(a);
+        const alpha = 1; // solid glyphs to be crisp (blur provides softness)
+
+        ctx.fillStyle = `rgba(${gray},${gray},${gray},${alpha})`;
+
+        const px = x * fontSize;
+        const py = y * fontSize;
+        ctx.fillText(glyph, px, py);
+      }
+    }
+
+    raf = requestAnimationFrame(render);
+  }
+
+  function start(parent) {
+    cancelAnimationFrame(raf);
+    setup(parent);
+    lastTick = 0;
+    raf = requestAnimationFrame(render);
+  }
+
+  const parent = canvas.parentElement;
+  if (!parent) return;
+  if (getComputedStyle(parent).position === 'static') parent.style.position = 'relative';
+
+  let ro = null;
+  if (typeof ResizeObserver !== 'undefined') {
+    ro = new ResizeObserver(() => start(parent));
+    ro.observe(parent);
+  } else {
+    window.addEventListener('resize', () => start(parent));
+  }
+
+  start(parent);
+
+  window.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(raf);
+    else start(parent);
+  });
+  window.addEventListener('pagehide', () => cancelAnimationFrame(raf));
+  window.addEventListener('beforeunload', () => {
+    cancelAnimationFrame(raf);
+    if (ro && parent) ro.unobserve(parent);
+  });
+})();
+</script>
