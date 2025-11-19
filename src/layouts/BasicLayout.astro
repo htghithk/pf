@@ -16,7 +16,10 @@ const year = new Date().getFullYear()
 		>
 			<div class="w-full max-w-xl">
 				<slot />
-				<small>{TITLE}, {year}</small>
+				<small>
+					<a href="/">{TITLE}</a>
+					, {year}
+				</small>
 			</div>
 		</div>
 	</body>

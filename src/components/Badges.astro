@@ -6,6 +6,6 @@ const { badges } = Astro.props;
     {badges.map((badge) => {
         return <a 
             href={`/tags/${badge}`}
-        class="hover:underline px-2 teyt-dark dark:text-white">{badge}</a>
+        class="hover:underline px-2 text-white dark:text-black bg-black dark:bg-white">{badge}</a>
     })}
 </div>

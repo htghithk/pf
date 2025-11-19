@@ -29,7 +29,7 @@ const sortedYears = Object.keys(allBlogEntriesGroupedByYear).sort(
 ---
 
 <BasicLayout title={TITLE}>
-	<Title title={TITLE.toUpperCase()} />
+	<Title title={TITLE.toLowerCase()} />
 	{
 		sortedYears.map((year) => (
 			<List
