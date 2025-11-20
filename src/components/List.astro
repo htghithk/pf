@@ -1,9 +1,11 @@
 ---
+import Badge from "./Badge.astro";
+
 const { items, type, title } = Astro.props;
 ---
 
 <section class="items-start mt-8">
-    {title && <h2 class="font-mono">{title}</h2>}
+    {title && <Badge href={`/tags/${title}`} title={title}/>}
     <ul class="list-disc list-inside">
         {
             items.map((item) => (

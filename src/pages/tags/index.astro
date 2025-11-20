@@ -1,4 +1,5 @@
 ---
+import Badge from "../../components/Badge.astro";
 import Title from "../../components/Title.astro";
 import BasicLayout from "../../layouts/BasicLayout.astro";
 
@@ -20,12 +21,7 @@ const allTags = [
             {
                 allTags.map((badge) => {
                     return (
-                        <a
-                            href={`/tags/${badge}`}
-                            class="hover:underline px-2 text-white dark:text-black bg-black dark:bg-white"
-                        >
-                            {badge}
-                        </a>
+                        <Badge href={`/tags/${badge}`} title={badge}/>
                     );
                 })
             }
