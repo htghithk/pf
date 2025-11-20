@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import Head from "../components/Head.astro";
-import { TITLE } from "../GLOBALS.astro";
+import Footer from "../components/Footer.astro";
 
 const { title } = Astro.props;
 
@@ -11,14 +11,10 @@ const year = new Date().getFullYear()
 <html lang="en-US">
 	<Head title={title} />
 	<body class="bg-white dark:bg-black">
-		<div
-			class="flex w-full items-center flex-col gap-2 p-4 md:p-8 text-dark dark:text-white"
-		>
-			<div class="w-full max-w-xl">
+		<div class="flex w-full items-center flex-col gap-2 p-4 text-dark dark:text-white">
+			<div class="w-full max-w-lg">
 				<slot />
-				<small class="font-mono">
-					<a href="/">{TITLE}</a>, {year}
-				</small>
+				<Footer/>
 			</div>
 		</div>
 	</body>

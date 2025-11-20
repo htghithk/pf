@@ -1,19 +1,11 @@
 ---
 import BasicLayout from "../layouts/BasicLayout.astro";
 import Title from "../components/Title.astro";
-import Socials from "../components/Socials.astro";
 import List from "../components/List.astro";
 import { getCollection } from "astro:content";
 import { TITLE } from "../GLOBALS.astro";
 import Asciiart from "../components/Asciiart.astro";
-import Gifs from "../components/Gifs.astro"
 import Gradient from "../components/Gradient.astro";
-
-let socials = [
-	{ title: "kleinertrompeter [at] proton [dot] me", link: "" , bold: true},
-	{ title: "Posts", link: "/posts" },
-	{ title: "Tags", link: "/tags" },
-];
 
 const allBlogEntries = await getCollection("post");
 
@@ -48,6 +40,4 @@ const sortedYears = Object.keys(allBlogEntriesGroupedByYear).sort(
 			/>
 		))
 	}
-	<Socials socials={socials} />
-	<Gifs/>
 </BasicLayout>

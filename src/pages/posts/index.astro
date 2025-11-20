@@ -4,9 +4,33 @@ import Title from "../../components/Title.astro";
 import BasicLayout from "../../layouts/BasicLayout.astro";
 import List from "../../components/List.astro";
 
-const alljobs = await getCollection('post');
+const allBlogEntries = await getCollection('post');
+
+const allBlogEntriesGroupedByYear = allBlogEntries.reduce((acc, post) => {
+	const year = new Date(post.data.date).getFullYear();
+	if (!acc[year]) {
+		acc[year] = [];
+	}
+	acc[year].push(post);
+	return acc;
+}, {});
+
+const sortedYears = Object.keys(allBlogEntriesGroupedByYear).sort(
+	(a, b) => Number(b) - Number(a),
+);
 ---
+
 <BasicLayout title="Posts">
     <Title title="Posts"/>
-    <List items={alljobs} type="posts"/>
+    {
+		sortedYears.map((year) => (
+			<List
+				items={allBlogEntriesGroupedByYear[year].sort(
+					(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+				)}
+				type="posts"
+				title={year}
+			/>
+		))
+	}
 </BasicLayout>

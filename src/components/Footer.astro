@@ -1,0 +1,19 @@
+---
+import { TITLE } from "../GLOBALS.astro";
+import Gifs from "./Gifs.astro";
+import Socials from "./Socials.astro";
+
+let socials = [
+    { title: "kleinertrompeter [at] proton [dot] me", link: "", bold: true },
+    { title: "Posts", link: "/posts" },
+    { title: "Tags", link: "/tags" },
+];
+
+const year = new Date(Date.now()).getFullYear();
+---
+
+<section class="items-start pt-4">
+    <Socials socials={socials} />
+    <Gifs />
+    <a class="font-mono hover:underline text-sm" href="/">{TITLE}</a>, {year}
+</section>
