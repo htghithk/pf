@@ -7,7 +7,6 @@
   width: 100%;
   height: 100%;
   z-index: -2;
-  pointer-events: none;
   background: transparent;
   will-change: filter, transform;
 }
@@ -21,9 +20,8 @@
   const canvas = document.getElementById('asciiart-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d', { alpha: true });
-
   let cols = 0, rows = 0, width = 0, height = 0, dpr = Math.max(1, window.devicePixelRatio || 1);
-  const fontSize = 7;                         // tune density
+  const fontSize = 6;                         // tune density
   // leading space included (important) — light -> heavy
   const glyphs = " .,:;iIl!+*%#@█";
   let state = null;       // Uint8Array 0/1
@@ -31,14 +29,14 @@
   let age = null;         // Float32Array brightness 0..1
   let raf = null;
   let lastTick = 0;
-  const tickInterval = 100; // ms per automaton step
+  const tickInterval = 75; // ms per automaton step
 
   // reset logic
   let resetting = false;
-  const fadeStep = 0.02; // per frame age decay while fading
+  const fadeStep = 0.002; // per frame age decay while fading
   const fadeCompleteThreshold = 0.02; // when max age <= this we re-seed
   const minAliveFraction = 0.03; // fraction of cells threshold to trigger reset
-  const minAliveAbsolute = 3; // minimum absolute threshold
+  const minAliveAbsolute = 10; // minimum absolute threshold
 
   // color scheme handling
   const mqLight = (typeof window !== 'undefined' && window.matchMedia)
@@ -124,10 +122,6 @@
         } else {
           newAlive = (n === 3) ? 1 : 0;
         }
-
-        // small spontaneous birth or death for variance
-        if (!alive && Math.random() < 0.002) newAlive = 1;
-        if (alive && Math.random() < 0.0015) newAlive = 0;
 
         next[i] = newAlive;
       }
