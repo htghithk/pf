@@ -16,7 +16,7 @@ const { items, type, title } = Astro.props;
     <ul class="list-disc list-inside">
         {
             items.map((item) => (
-                <li>
+                <li class="py-1">
                     <a
                         href={`/${type}/${item.slug}`}
                         class="hover:underline text-accent vistited:text-secondary font-serif prose-headings:font-mono"

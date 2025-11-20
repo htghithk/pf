@@ -4,7 +4,7 @@ import Badge from "./Badge.astro";
 const { badges } = Astro.props;
 ---
 
-<div class="flex gap-2 py-1 font-mono text-s">
+<div class="flex flex-wrap gap-2 py-1 font-mono text-s">
     {badges.map((badge) => {
         return <Badge href={`/tags/${badge}`} title={badge}/>
     })}
