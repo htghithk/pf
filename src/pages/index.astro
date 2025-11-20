@@ -6,9 +6,10 @@ import List from "../components/List.astro";
 import { getCollection } from "astro:content";
 import { TITLE } from "../GLOBALS.astro";
 import Asciiart from "../components/Asciiart.astro";
+import Gifs from "../components/Gifs.astro"
 
 let socials = [
-	{ title: "mail [at] linussilbertein [dot] de", link: "" , bold: true},
+	{ title: "kleinertrompeter [at] proton [dot] me", link: "" , bold: true},
 	{ title: "Posts", link: "/posts" },
 	{ title: "Tags", link: "/tags" },
 ];
@@ -46,4 +47,5 @@ const sortedYears = Object.keys(allBlogEntriesGroupedByYear).sort(
 		))
 	}
 	<Socials socials={socials} />
+	<Gifs/>
 </BasicLayout>
