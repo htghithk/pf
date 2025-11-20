@@ -3,7 +3,7 @@ import BasicLayout from "../layouts/BasicLayout.astro";
 import Title from "../components/Title.astro";
 import List from "../components/List.astro";
 import { getCollection } from "astro:content";
-import { TITLE } from "../GLOBALS.astro";
+import { IPA, TITLE } from "../GLOBALS.astro";
 import Asciiart from "../components/Asciiart.astro";
 import Gradient from "../components/Gradient.astro";
 
@@ -25,7 +25,7 @@ const sortedYears = Object.keys(allBlogEntriesGroupedByYear).sort(
 
 <BasicLayout title={TITLE} showgifs>
 	<div class="title-anim-wrap py-4" style="position: relative; ">
-        <Title title={TITLE.toLowerCase()} />
+        <Title title=`${TITLE.toLowerCase()}` smalltitle=`[${IPA}]` />
 		<Gradient/>
         <Asciiart/>
     </div>

@@ -2,6 +2,6 @@
 const { title, link, bold } = Astro.props;
 ---
 
-<a href={link} class="inline-flex gap-1 align-middle items-center">
-    {bold ? <b class="font-mono text-wrap hover:underline">{title ? title : link}</b>: <p class="font-mono text-wrap hover:underline">{title ? title : link}</p>}
+<a href={link} class=`font-mono hover:underline ${bold && 'font-bold'}`>
+    {title}
 </a>

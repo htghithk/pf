@@ -1,19 +1,22 @@
 ---
 import Social from "./Social.astro";
 
-const { socials } = Astro.props;
+const socials = [
+    { title: "kleinertrompeter [at] proton [dot] me", link: "", bold: true },
+    { title: "Posts", link: "/posts" },
+    { title: "Tags", link: "/tags" },
+    { title: "Resume", link: "/"}
+];
 ---
 
-<ul class="flex gap-4 flex-wrap">
+<div class="flex flex-wrap gap-x-8">
     {
         socials.map((item) => (
-            <li>
                 <Social
                     title={item.title}
                     link={item.link}
                     bold={item.bold ? true : false}
                 />
-            </li>
         ))
     }
-</ul>
+</div>
