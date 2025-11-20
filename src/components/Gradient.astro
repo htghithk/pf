@@ -1,0 +1,38 @@
+---
+
+---
+
+<style>
+.gradient-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    var(--grad-color-left, rgba(255,255,255,0.75)),
+    var(--grad-color-right, rgba(255,255,255,1))
+  );
+  will-change: opacity, transform;
+}
+
+/* dark mode: light tint over dark background */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --grad-color-left: rgba(0, 0, 0,0.8);
+    --grad-color-right: rgb(0,0,0, 0);
+  }
+}
+
+/* light mode: dark tint over light background (inverted) */
+@media (prefers-color-scheme: light) {
+  :root {
+    --grad-color-left: rgba(255,255,255,0.95);
+    --grad-color-right: rgba(255,255,255,0);
+  }
+}
+</style>
+
+<div class="gradient-overlay" aria-hidden="true"></div>

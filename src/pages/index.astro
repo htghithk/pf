@@ -7,6 +7,7 @@ import { getCollection } from "astro:content";
 import { TITLE } from "../GLOBALS.astro";
 import Asciiart from "../components/Asciiart.astro";
 import Gifs from "../components/Gifs.astro"
+import Gradient from "../components/Gradient.astro";
 
 let socials = [
 	{ title: "kleinertrompeter [at] proton [dot] me", link: "" , bold: true},
@@ -33,6 +34,7 @@ const sortedYears = Object.keys(allBlogEntriesGroupedByYear).sort(
 <BasicLayout title={TITLE}>
 	<div class="title-anim-wrap p-4" style="position: relative; ">
         <Title title={TITLE.toLowerCase()} />
+		<Gradient/>
         <Asciiart/>
     </div>
 	{

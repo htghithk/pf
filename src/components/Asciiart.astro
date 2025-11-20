@@ -2,22 +2,16 @@
 ---
 <style>
 .asciiart-canvas {
-  --ascii-blur: 10px; /* adjust this value to change blur amount */
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: -2;
   pointer-events: none;
   background: transparent;
-  filter: blur(var(--ascii-blur));
-  -webkit-filter: blur(var(--ascii-blur));
-  transform: translateZ(0);
   will-change: filter, transform;
 }
-@media (prefers-reduced-motion: reduce) {
-  .asciiart-canvas { display: none; }
-}
+
 </style>
 
 <canvas class="asciiart-canvas" id="asciiart-canvas" aria-hidden="true"></canvas>
