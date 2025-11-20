@@ -36,18 +36,18 @@ tags: ['kew', 'leipzig', '2025']
 |[^14]|"German police expands use of Palantir surveillance software" von Marcel Fürstenau auf [de.com](https://www.dw.com/en/german-police-expands-use-of-palantir-surveillance-software/a-73497117) vom 08.04.2025 zuletzt besucht am 21.10.2025|
 |[^15]|"State Mass surveillance" auf [Mullvad VPN](https://mullvad.net/en/why-privacy-matters/state-mass-surveillance) zuletzt besucht am 21.10.2025|
 
-[^1]: https://www.iso.org/obp/ui/en/#iso:std:iso-iec:2382:ed-1:v2:en
-[^2]: https://de.wikipedia.org/wiki/Liste_von_Datendiebst%C3%A4hlen
-[^3]: https://boldist.co/analytics/google-data-collection/
-[^4]: https://filiale.kaufland.de/service/kaufland-app.html
-[^5]: https://www.rewe.de/service/app/
-[^6]: https://medienservice.sachsen.de/medien/news/1073616
-[^7]: https://www.saechsische.de/politik/regional/sachsen-fuehrt-ab-2025-neue-bezahlkarte-ein-weniger-bargeld-fuer-asylbewerber-PMMW6PCOEFFSXME6UIW3MCMMP4.html
-[^8]: https://fragdenstaat.de/artikel/exklusiv/2024/12/alles-fur-eine-karte-asylsuchende-bezahlkarte/
-[^9]: https://digitalcourage.de/nichts-zu-verbergen
-[^10]: https://fightchatcontrol.eu/
-[^11]: https://mullvad.net/en/chatcontrol/stop-chatcontrol
-[^12]: https://www.security.org/resources/data-tech-companies-have/
-[^13]: https://www.newsweek.com/edward-snowden-open-ai-nsa-warning-1913173
-[^14]: https://www.dw.com/en/german-police-expands-use-of-palantir-surveillance-software/a-73497117
-[^15]: https://mullvad.net/en/why-privacy-matters/state-mass-surveillance
+[^1]: [iso.org](https://www.iso.org/obp/ui/en/#iso:std:iso-iec:2382:ed-1:v2:en=)
+[^2]: [de.wikipedia.org](https://de.wikipedia.org/wiki/Liste_von_Datendiebst%C3%A4hlen)
+[^3]: [boldist.co](https://boldist.co/analytics/google-data-collection/)
+[^4]: [filiale.kaufland.de](https://filiale.kaufland.de/service/kaufland-app.html)
+[^5]: [rewe.de](https://www.rewe.de/service/app/)
+[^6]: [medienservice.saschsen.de](https://medienservice.sachsen.de/medien/news/1073616)
+[^7]: [saechische.de](https://www.saechsische.de/politik/regional/sachsen-fuehrt-ab-2025-neue-bezahlkarte-ein-weniger-bargeld-fuer-asylbewerber-PMMW6PCOEFFSXME6UIW3MCMMP4.html)
+[^8]: [fragdenstaat.de](https://fragdenstaat.de/artikel/exklusiv/2024/12/alles-fur-eine-karte-asylsuchende-bezahlkarte/)
+[^9]: [digitalcourage.de](https://digitalcourage.de/nichts-zu-verbergen)
+[^10]: [fightchatcontrol.eu](https://fightchatcontrol.eu/)
+[^11]: [mullvad.net](https://mullvad.net/en/chatcontrol/stop-chatcontrol)
+[^12]: [security.org](https://www.security.org/resources/data-tech-companies-have/)
+[^13]: [newsweek.com](https://www.newsweek.com/edward-snowden-open-ai-nsa-warning-1913173)
+[^14]: [dw.com](https://www.dw.com/en/german-police-expands-use-of-palantir-surveillance-software/a-73497117)
+[^15]: [mullvad.net](https://mullvad.net/en/why-privacy-matters/state-mass-surveillance)
