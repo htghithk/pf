@@ -1,6 +1,7 @@
 ---
 import BasicLayout from "../../layouts/BasicLayout.astro";
 import Title from "../../components/Title.astro";
+import List from "../../components/List.astro";
 
 export async function getStaticPaths() {
     const allPosts: { frontmatter: { tags: string[] } }[] = Object.values(
@@ -24,10 +25,12 @@ const filteredPosts = posts
     .filter((post: any) => post.frontmatter.tags.includes(tag))
     .map((post: any) => ({
         file: post.file,
+        data: {
+            title: post.frontmatter.title,
+            desc: post.frontmatter.desc,
+        },
         type: post.file.split("/").reverse()[1],
         slug: post.file.split("/").reverse()[0].replace(".md", ""),
-        title: post.frontmatter.title,
-        date: post.frontmatter.date
     }));
 ---
 
@@ -35,19 +38,6 @@ const filteredPosts = posts
     <Title title=`${tag.toUpperCase()}` description="Posts with Tag" />
 
     <section class="items-start mt-8">
-        <ul class="list-disc list-inside">
-            {
-            filteredPosts.map((item) => (
-                <li>
-                    <a
-                        href={`/${item.type}s/${item.slug}`}
-                        class="hover:underline text-accent vistited:text-secondary"
-                    >
-                        {item.title}
-                    </a>
-                </li>
-            ))
-        }
-        </ul>
+        <List items={filteredPosts} type="posts" />
     </section>
 </BasicLayout>

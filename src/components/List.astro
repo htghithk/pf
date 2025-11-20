@@ -1,5 +1,12 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import Badge from "./Badge.astro";
+
+interface Props {
+    items: CollectionEntry<'post'>[];
+    type: string;
+    title?: string
+}
 
 const { items, type, title } = Astro.props;
 ---
@@ -14,7 +21,7 @@ const { items, type, title } = Astro.props;
                         href={`/${type}/${item.slug}`}
                         class="hover:underline text-accent vistited:text-secondary font-serif prose-headings:font-mono"
                     >
-                        {item.data.title}
+                        <b>{item.data.title}</b> {item.data.desc && item.data.desc}
                     </a>
                 </li>
             ))

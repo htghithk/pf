@@ -3,10 +3,10 @@ import { z, defineCollection } from 'astro:content';
 // 2. Define your collection(s)
 
 const postCollection = defineCollection({
-  type: 'content',
   schema: z.object({
     title: z.string(),
-    tags: z.array(z.string()).optional(),
+    desc: z.string().optional(),
+    tags: z.array(z.string()),
     date: z.date().optional()
   })
 })
