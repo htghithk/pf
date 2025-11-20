@@ -1,11 +1,11 @@
 ---
+import Badge from "./Badge.astro";
+
 const { badges } = Astro.props;
 ---
 
 <div class="flex gap-2 py-1 font-mono text-s">
     {badges.map((badge) => {
-        return <a 
-            href={`/tags/${badge}`}
-        class="hover:underline px-2 text-white dark:text-black bg-black dark:bg-white">{badge}</a>
+        return <Badge href={`/tags/${badge}`} title={badge}/>
     })}
 </div>
