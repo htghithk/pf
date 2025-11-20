@@ -3,9 +3,7 @@ import "../styles/global.css";
 import Head from "../components/Head.astro";
 import Footer from "../components/Footer.astro";
 
-const { title } = Astro.props;
-
-const year = new Date().getFullYear()
+const { title, showgifs } = Astro.props;
 ---
 
 <html lang="en-US">
@@ -14,7 +12,7 @@ const year = new Date().getFullYear()
 		<div class="flex w-full items-center flex-col gap-2 p-4 text-dark dark:text-white">
 			<div class="w-full max-w-lg">
 				<slot />
-				<Footer/>
+				<Footer showgifs={showgifs}/>
 			</div>
 		</div>
 	</body>
