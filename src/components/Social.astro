@@ -1,7 +1,14 @@
 ---
+interface Props {
+    title: string;
+    link: string;
+    bold: boolean;
+}
+
 const { title, link, bold } = Astro.props;
+const Element = link != null ? 'a': 'p'
 ---
 
-<a href={link} class=`font-mono hover:underline ${bold && 'font-bold'}`>
+<Element href={link} class=`font-mono hover:underline ${bold && 'font-bold'}`>
     {title}
-</a>
+</Element>

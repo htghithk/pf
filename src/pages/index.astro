@@ -24,9 +24,9 @@ const sortedYears = Object.keys(allBlogEntriesGroupedByYear).sort(
 ---
 
 <BasicLayout title={TITLE} showgifs>
-	<div class="title-anim-wrap py-4" style="position: relative; ">
-        <Title title=`${TITLE.toLowerCase()}` smalltitle=`[${IPA}]` />
-		<Gradient/>
+    <div class="title-anim-wrap py-4 relative">
+        <Title title={` ${TITLE.toLowerCase()}`} smalltitle={`[${IPA}]`} />
+        <Gradient orientation="right"/>
         <Asciiart/>
     </div>
 	{

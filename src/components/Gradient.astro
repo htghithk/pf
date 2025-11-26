@@ -1,8 +1,12 @@
 ---
+interface Props {
+  orientation: "right" | "top"
+}
 
+const {orientation} = Astro.props
 ---
 
-<style>
+<style define:vars={{ orientation }}>
 .gradient-overlay {
   position: absolute;
   inset: 0;
@@ -11,7 +15,7 @@
   z-index: -1;
   pointer-events: none;
   background: linear-gradient(
-    to right,
+    to var(--orientation),
     var(--grad-color-left, rgba(255,255,255,0.75)),
     var(--grad-color-right, rgba(255,255,255,1))
   );
