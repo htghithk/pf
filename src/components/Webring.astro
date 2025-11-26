@@ -1,0 +1,18 @@
+---
+interface Props {
+    name: string
+    root: string,
+    prev: string,
+    next: string,
+    random?: string,
+}
+
+const {root, prev, next, random, name} = Astro.props
+---
+
+<ul class="flex gap-x-4">
+    {random && <li><a href={random} class="hover:underline font-mono">?</a></li>}
+    <li><a href={prev} class="hover:underline font-mono">&lt;&lt;</a></li>
+    <li><a href={root} class="hover:underline font-bold font-mono">{name}</a></li>
+    <li><a href={next} class="hover:underline font-mono">&gt;&gt;</a></li>
+</ul>

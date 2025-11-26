@@ -1,0 +1,21 @@
+---
+import Webring from "./Webring.astro"
+
+const webrings = [
+    {
+        name: 'AG Link',
+        root: 'https://ag-link.xyz/webring',
+        prev: 'https://ag-link.xyz/webring/next/wolle',
+        next: 'https://ag-link.xyz/webring/prev/wolle',
+        random: 'https://ag-link.xyz/webring/random'
+    }
+]
+---
+
+<div class="justify-items-end">
+    {
+        webrings.map((item) => (
+            <Webring name={item.name} root={item.root} prev={item.prev} next={item.next} random={item.random}/>
+        ))
+    }
+</div>
