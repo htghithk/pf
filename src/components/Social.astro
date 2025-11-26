@@ -9,6 +9,6 @@ const { title, link, bold } = Astro.props;
 const Element = link != null ? 'a': 'p'
 ---
 
-<Element href={link} class=`font-mono hover:underline ${bold && 'font-bold'}`>
+<Element href={link} class=`font-mono ${link != null && 'hover:underline'} ${bold && 'font-bold'}`>
     {title}
 </Element>
