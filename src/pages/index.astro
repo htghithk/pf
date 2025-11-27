@@ -6,6 +6,7 @@ import { getCollection } from "astro:content";
 import { IPA, TITLE } from "../GLOBALS.astro";
 import Asciiart from "../components/Asciiart.astro";
 import Gradient from "../components/Gradient.astro";
+import Webrings from "../components/Webrings.astro";
 
 const allBlogEntries = await getCollection("post");
 
@@ -29,15 +30,28 @@ const sortedYears = Object.keys(allBlogEntriesGroupedByYear).sort(
         <Gradient orientation="right"/>
         <Asciiart/>
     </div>
-	{
-		sortedYears.map((year) => (
-			<List
-				items={allBlogEntriesGroupedByYear[year].sort(
-					(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-				)}
-				type="posts"
-				title={year}
-			/>
-		))
-	}
+    {
+        sortedYears.map((year) => (
+            <List
+                items={allBlogEntriesGroupedByYear[year].sort(
+                    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+                )}
+                type="posts"
+                title={year}
+            />
+        ))
+    }
+
+    <!-- smaller bottom gradient for small screens only -->
+    <div
+      class="fixed left-0 right-0 bottom-0 z-40 pointer-events-none lg:hidden h-20 max-h-1/4"
+      aria-hidden="true"
+    >
+      <Gradient orientation="top" />
+    </div>
+
+    <!-- webrings positioned bottom-right with 1rem padding on bottom & right -->
+    <div class="fixed z-50 bottom-0 right-0 pb-4 pr-4" aria-hidden="false">
+      <Webrings />
+    </div>
 </BasicLayout>
