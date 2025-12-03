@@ -8,7 +8,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <BasicLayout title=`${frontmatter.title}`>
-    <Title title={frontmatter.title} />
+    <Title title={frontmatter.title} smalltitle={frontmatter.desc}/>
     {frontmatter.date && <Date date={frontmatter.date} />}
     <Badges badges={frontmatter.tags} />
     <article
