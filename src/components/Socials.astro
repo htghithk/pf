@@ -1,12 +1,6 @@
 ---
 import Social from "./Social.astro";
-
-const socials = [
-    { title: "kleinertrompeter [at] proton [dot] me", bold: true },
-    { title: "PGP key", link: "../public_key.asc" },
-    { title: "Posts", link: "/posts" },
-    { title: "Tags", link: "/tags" }
-];
+import { socials } from "../GLOBALS.astro";
 ---
 
 <div class="flex flex-wrap gap-x-8">

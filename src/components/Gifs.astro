@@ -1,14 +1,11 @@
 ---
+import { gifs } from "../GLOBALS.astro"
 ---
 
 <div class="flex flex-wrap gap-2 py-2">
-    <a href="https://www.bdsmovement.net/Guide-to-BDS-Boycott">
-        <img src="../images/riversea.gif" alt="riversea">
-    </a>
-    <a href="/">
-        <img src="../images/linux-8831.png" alt="linux">
-    </a>
-    <a href="https://www.haskell.org/?uwu=true">
-        <img src="../images/fun_haskell.png" alt="functional">
-    </a>
+    {gifs.map((item) => (
+        <a href={item.href}>
+            <img src={item.src} alt={item.alt}/>
+        </a>
+    ))}
 </div>

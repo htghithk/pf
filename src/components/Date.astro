@@ -1,16 +1,26 @@
 ---
-
 interface Props {
-    date: Date
+    date: Date;
 }
 
-const {date} = Astro.props
+const { date } = Astro.props;
 
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+];
 ---
 
-<a
-    href=`/tags/${date.getFullYear()}`
-    class="font-mono hover:underline px-2"
+<a href=`/tags/${date.getFullYear()}` class="font-mono hover:underline px-2"
     >{`${date.getDate()}. ${months[date.getMonth()]} ${date.getFullYear()}`}</a
 >

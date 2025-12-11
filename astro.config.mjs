@@ -1,4 +1,4 @@
-import { defineConfig, passthroughImageService } from 'astro/config';
+import { defineConfig } from 'astro/config';
 
 import tailwindcss from "@tailwindcss/vite"
 
@@ -7,8 +7,5 @@ export default defineConfig({
   site: 'https://lambdacalc.xyz',
   vite: {
     plugins: [tailwindcss()]
-  },
-  image: {
-    service: passthroughImageService(),
   }
 });
