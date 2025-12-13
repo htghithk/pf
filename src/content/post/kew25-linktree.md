@@ -1,7 +1,7 @@
 ---
 title: Digitale Selbstverteidigung KEW 2025 Linktree
 date: 2025-10-23
-tags: ['kew', 'leipzig', '2025']
+tags: ['kew', 'leipzig', 'link', '2025']
 ---
 
 - [Folien](https://git.ag-link.xyz/linus/kew25-selfdef/src/branch/main/slides.pdf)
